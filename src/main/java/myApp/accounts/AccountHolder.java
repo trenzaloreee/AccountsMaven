@@ -1,4 +1,4 @@
-package accounts;
+package myApp.accounts;
 
 import java.util.Objects;
 
@@ -16,6 +16,7 @@ public class AccountHolder {
         this.name = name;
     }
 
+    public AccountHolder() {}
 
     @Override
     public boolean equals(Object o) {

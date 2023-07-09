@@ -1,4 +1,6 @@
-package accounts;
+package myApp.accounts;
+
+//import myApp.AccountInterface;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -16,6 +18,7 @@ public abstract class Account implements AccountInterface {
 
     private AccountHolder holder;
 
+    public Account() {}
 
     public Account(AccountHolder holder, double balance, int accountNumber) {
         this.balance = BigDecimal.valueOf(balance);
@@ -25,6 +28,9 @@ public abstract class Account implements AccountInterface {
         accountsMap.put(holder, this);
     }
 
+    public static Account addAccount(AccountHolder holder, Account account){
+        return accountsMap.put(holder, account);
+    }
 
     @Override
     public void pay(double price) {
@@ -44,6 +50,10 @@ public abstract class Account implements AccountInterface {
     @Override
     public BigDecimal getBalance() {
         return balance;
+    }
+
+    public AccountHolder getHolder() {
+        return holder;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package accounts;
+package myApp.accounts;
 
 import java.util.LinkedList;
 import java.util.List;
