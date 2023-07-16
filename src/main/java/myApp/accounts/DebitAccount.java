@@ -7,6 +7,8 @@ public class DebitAccount extends Account {
         super(holder, balance, accountNumber);
     }
 
+    public DebitAccount () {}
+
     @Override
     public void pay(double price) {
         if (getBalance().subtract(BigDecimal.valueOf(price)).intValue() >= 0){

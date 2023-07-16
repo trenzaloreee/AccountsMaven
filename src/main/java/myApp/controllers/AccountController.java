@@ -2,6 +2,7 @@ package myApp.controllers;
 
 import myApp.accounts.Account;
 import myApp.accounts.AccountHolder;
+import myApp.accounts.DebitAccount;
 import myApp.model.AccountWrapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,10 +20,11 @@ public class AccountController {
 //    }
 
     @PostMapping("createAccount")
-    public String createAccount(@RequestBody Account account) {
-        if (Account.addAccount(account.getHolder(), account) != null) {
+    public String createAccount(@RequestBody DebitAccount account) {
+        Account.addAccount(account.getHolder(), account);
+        if (Account.getAccount(account.getHolder()).equals(account)) {
             return "Аккаунт добавлен успешно";
         }
-            return "Аккаунт не добавлен";
+        return null;
     }
 }
