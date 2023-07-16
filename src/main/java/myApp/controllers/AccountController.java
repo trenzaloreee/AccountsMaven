@@ -14,6 +14,8 @@ public class AccountController {
         return Account.getAccount(holder).toString();
     }
 
+    // TODO написать маппинг на метод пэй/бай
+
 //    @PostMapping("createAccount")     // TODO delete this and wrapper class
 //    public String createAccount(@RequestBody AccountWrapper wrapper) {
 //        if (Account.addAccount(wrapper.getHolder(), wrapper.getAccount()) != null) {
@@ -27,4 +29,6 @@ public class AccountController {
         }
         return null;
     }
+
+    // TODO выдать баланс
 }

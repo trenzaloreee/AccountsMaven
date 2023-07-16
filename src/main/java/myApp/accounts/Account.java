@@ -87,6 +87,7 @@ public abstract class Account implements AccountInterface {
     }
 
     public static Account getAccount(AccountHolder holder) {
+        System.out.println(accountsMap); // todo remove
         return accountsMap.get(holder);
     }
 
