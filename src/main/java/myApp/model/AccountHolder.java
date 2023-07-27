@@ -1,4 +1,4 @@
-package myApp.accounts;
+package myApp.model;
 
 import java.util.Objects;
 

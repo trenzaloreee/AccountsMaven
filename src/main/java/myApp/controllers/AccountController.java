@@ -1,34 +1,53 @@
 package myApp.controllers;
 
-import myApp.accounts.Account;
-import myApp.accounts.AccountHolder;
-import myApp.accounts.DebitAccount;
-import myApp.model.AccountWrapper;
+import myApp.model.Account;
+import myApp.model.AccountHolder;
+import myApp.model.DebitAccount;
+import myApp.services.impl.AccountServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @RestController
 public class AccountController {
+
+    @Autowired
+    AccountServiceImpl accountService;
 
     @GetMapping("getAccount")
     public String getAccount(@RequestBody AccountHolder holder) {
         return Account.getAccount(holder).toString();
     }
 
-    // TODO написать маппинг на метод пэй/бай
 
-//    @PostMapping("createAccount")     // TODO delete this and wrapper class
-//    public String createAccount(@RequestBody AccountWrapper wrapper) {
-//        if (Account.addAccount(wrapper.getHolder(), wrapper.getAccount()) != null) {
-//    }
+    @GetMapping("getBalance")
+    public String getBalance(@RequestBody AccountHolder holder) {
+        String balance = Account.getAccount(holder).getBalance().toString();
+        return balance;
+    }
 
-    @PostMapping("createAccount")
-    public String createAccount(@RequestBody DebitAccount account) {
-        Account.addAccount(account.getHolder(), account);
-        if (Account.getAccount(account.getHolder()).equals(account)) {
-            return "Аккаунт добавлен успешно";
+    @PostMapping("deposit")
+    public String deposit(@RequestBody AccountHolder holder, @RequestParam double depositSum) {
+        BigDecimal initialBalance = Account.getAccount(holder).getBalance();
+        Account.getAccount(holder).deposit(depositSum);
+        if (initialBalance.add(BigDecimal.valueOf(depositSum)).equals(Account.getAccount(holder).getBalance())) {
+            return "пополненине на " + depositSum + " успешно";
         }
         return null;
     }
 
-    // TODO выдать баланс
+    @PostMapping("createAccount")
+    public String createAccount(@RequestBody DebitAccount account) {
+//        Account.addAccount(account.getHolder(), account); // todo
+        accountService.createAccount(account.getHolder(), account);
+        if (Account.getAccount(account.getHolder()).equals(account)) {
+            return "Аккаунт добавлен успешно";
+        }
+        Account.getAccounts();
+        return null;
+    }
+
+    //todo call to accountService for each method
+
 }

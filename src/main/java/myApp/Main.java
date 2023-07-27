@@ -10,7 +10,7 @@ public class Main {
 // todo создать класс представляющий филиал банка. 2 очереди! на создание счета, которые сохраняются в памяти (queue = new linkedlist  )
 
 
-//        myApp.AccountWithInterest saving2 = new myApp.accounts.SavingAccount();
+//        myApp.AccountWithInterest saving2 = new myApp.model.SavingAccount();
 
 
 //        Account debit = new DebitAccount(new AccountHolder("Alex", "Alex"), 0, 1234);

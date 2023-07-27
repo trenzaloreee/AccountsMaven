@@ -1,4 +1,4 @@
-package myApp.accounts;
+package myApp.model;
 
 public interface AccountWithInterest {
 
