@@ -28,8 +28,8 @@ public abstract class Account implements AccountInterface {
         accountsMap.put(holder, this);
     }
 
-    public static Account addAccount(AccountHolder holder, Account account){
-        return accountsMap.put(holder, account);
+    public static void addAccount(AccountHolder holder, Account account){
+        accountsMap.put(holder, account);
     }
 
     @Override
@@ -80,6 +80,10 @@ public abstract class Account implements AccountInterface {
     public String toString() {
         return "Держатель аккаунта - " + holder + "." + "\nБаланс счета: " + balance + "." + "\nНомер счета: " + accountNumber + ".";
 
+    }
+
+    public static HashMap<AccountHolder,Account> getAllAccounts() {
+        return accountsMap;
     }
 
     public static void getAccounts() {

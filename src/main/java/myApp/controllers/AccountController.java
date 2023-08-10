@@ -37,16 +37,39 @@ public class AccountController {
         return null;
     }
 
+    @GetMapping("getAllAccounts")
+    public String getAllAccounts() {
+        return Account.getAllAccounts().toString();
+    }
+
     @PostMapping("createAccount")
     public String createAccount(@RequestBody DebitAccount account) {
 //        Account.addAccount(account.getHolder(), account); // todo
         accountService.createAccount(account.getHolder(), account);
+
         if (Account.getAccount(account.getHolder()).equals(account)) {
             return "Аккаунт добавлен успешно";
         }
-        Account.getAccounts();
-        return null;
+
+        return "Аккаунт не добавлен";
     }
+
+    @PostMapping("pay")
+    public String pay(@RequestBody AccountHolder holder, @RequestParam double price) {
+        BigDecimal initialBalance = Account.getAccount(holder).getBalance();
+        try {
+            accountService.pay(holder, price);
+        } catch (Exception e) {
+            return e.toString();
+        }
+        BigDecimal newBalance = Account.getAccount(holder).getBalance();
+
+        if ((newBalance.add(BigDecimal.valueOf(price))).equals(initialBalance)) {
+            return "Прошла оплата на " + price;
+        }
+        return "Что-то пошло не так. Баланс: " + newBalance;
+    }
+
 
     //todo call to accountService for each method
 
