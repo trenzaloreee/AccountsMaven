@@ -45,6 +45,10 @@ public class AccountHolder {
         return lastName + " " + name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getLastName() {
         return lastName;
     }

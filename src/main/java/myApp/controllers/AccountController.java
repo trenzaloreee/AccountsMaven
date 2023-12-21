@@ -15,9 +15,17 @@ public class AccountController {
     @Autowired
     AccountServiceImpl accountService;
 
+    public AccountController() {
+        this.accountService = new AccountServiceImpl();
+    }
+
     @GetMapping("getAccount")
     public String getAccount(@RequestBody AccountHolder holder) {
         return Account.getAccount(holder).toString();
+    }
+
+    public Account getAccountAsObject(AccountHolder holder){
+        return Account.getAccount(holder);
     }
 
 
@@ -43,7 +51,7 @@ public class AccountController {
     }
 
     @PostMapping("createAccount")
-    public String createAccount(@RequestBody DebitAccount account) {
+    public String createAccount(@RequestBody Account account) {
 //        Account.addAccount(account.getHolder(), account); // todo
         accountService.createAccount(account.getHolder(), account);
 
